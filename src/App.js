@@ -1,8 +1,9 @@
-import Route from './router/index.jsx'
+import Routers from './router/index.jsx'
+import './App.css'
 function App() {
   return (
     <div className="App">
-      <Route></Route>
+      <Routers></Routers>
     </div>
   );
 }

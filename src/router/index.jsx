@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import Login from '@/views/login/index.jsx'
+import Layout from '@/views/layout/index.jsx'
 
-class Router extends Component {
+class Routers extends Component {
   render() {
     return (
-      <div>
-        123123
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login" component={Login}></Route>
+          <Route path="/" component={Layout}></Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
 
-export default Router;
+export default Routers;
