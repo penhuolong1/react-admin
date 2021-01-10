@@ -32,16 +32,15 @@ export const login = config => {
   const {
     username
   } = JSON.parse(config.body);
-  debugger
   const token = tokens[username];
   if (!token) {
     return {
-      status: 1,
+      state: 1,
       message: "用户名或密码错误",
     };
   }
   return {
-    status: 0,
+    state: 0,
     token,
   };
 }
@@ -50,18 +49,18 @@ export const userInfo = (config) => {
   const userInfo = users[token];
   if (!userInfo) {
     return {
-      status: 1,
+      state: 1,
       message: "获取用户信息失败",
     };
   }
   return {
-    status: 0,
+    state: 0,
     userInfo,
   };
 }
 export const getUsers = () => {
   return {
-    status: 0,
+    state: 0,
     users: Object.values(users),
   };
 }
@@ -76,6 +75,6 @@ export const deleteUser = (config) => {
     delete users[token];
   }
   return {
-    status: 0,
+    state: 0,
   };
 }

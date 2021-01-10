@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { API_STATE_ERR } from './constVal'
+import { message } from 'antd'
 
 const service = axios.create({
   baseURL: '/api',
@@ -7,7 +9,7 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
-
+    return config;
   },
   error => {
     console.error(error)
@@ -16,7 +18,13 @@ service.interceptors.request.use(
 )
 // 响应拦截器
 service.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    const {state} = response.data
+    if (state === API_STATE_ERR) {
+      message.error(response.data.message)
+    }
+    return response.data
+  },
   (error) => {
     console.log("err" + error); // for debug
     return Promise.reject(error);
