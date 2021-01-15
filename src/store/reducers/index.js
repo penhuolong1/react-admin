@@ -3,10 +3,12 @@ const initState = {
   settingPanelVisible: 1,
 };
 export default function app(state = initState, action) {
+  debugger
   switch (action.type) {
     case 'state':
       return {
-        ...state
+        ...state,
+        settingPanelVisible: state.settingPanelVisible ++
       };
     case 'text':
       return {

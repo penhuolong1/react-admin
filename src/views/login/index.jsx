@@ -4,11 +4,14 @@ import { API_STATE_OK } from '@/utils/constVal.js'
 import { Redirect } from "react-router-dom";
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { login } from '@/api/login.js'
+import { connect } from 'react-redux'
 import './index.scss'
 
 class Login extends Component {
   state = {
     token: null
+  }
+  componentDidMount() {
   }
   // 登陆提交
   loginSubmit = values => {
@@ -20,6 +23,12 @@ class Login extends Component {
           token: res.token
         })
       }
+    })
+  }
+  add = () => {
+    console.log(1)
+    this.props.dispatch({
+      type: 'state'
     })
   }
   render() {
@@ -54,11 +63,22 @@ class Login extends Component {
                 登陆
               </Button>
             </Form.Item>
+            <Form.Item>
+              <Button className="login-btn" type="primary" onClick={this.add}>
+                添加
+              </Button>
+              {this.props.settingPanelVisible}
+            </Form.Item>
           </Form>
         </div>
       </div>
     );
   }
 }
-
-export default Login;
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    ...state
+  };
+};
+export default connect(mapStateToProps)(Login);
