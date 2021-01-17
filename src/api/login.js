@@ -7,3 +7,16 @@ export function login(data) {
     data
   })
 }
+
+/**
+ * 获取用户信息
+ * @param {string} token 
+ */
+export function reqLoginInfo(params) {
+  return request({
+    url: '/userInfo',
+    method: 'get',
+    data: params
+  })
+}
+

@@ -1,0 +1,13 @@
+.ant-layout-header.layout-header {
+  background-color: #fff;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  .layout-header-left {
+    display: flex;
+  }
+  .menu-icon {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+}

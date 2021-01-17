@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
+import { Layout } from 'antd';
+import Header from './header/index.jsx';
+import Sider from './menu/index.jsx';
+import Content from './content/index.jsx';
 
-class Layout extends Component {
+class Main extends Component {
   render() {
     return (
-      <div>
-        主页面
-      </div>
+      <Layout style={{ minHeight: "100vh" }}>
+      <Sider></Sider>
+      <Layout>
+        <Header />
+        <Content></Content>
+      </Layout>
+    </Layout>
     );
   }
 }
 
-export default Layout;
+export default Main;

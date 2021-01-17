@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Checkbox, message } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { API_STATE_OK } from '@/utils/constVal.js'
 import { Redirect } from "react-router-dom";
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import { login } from '@/api/login.js'
+import { reqLogin } from '@/store/actions/user.js'
 import { connect } from 'react-redux'
 import './index.scss'
 
@@ -15,25 +15,15 @@ class Login extends Component {
   }
   // 登陆提交
   loginSubmit = values => {
-    console.log(this)
-    login(values).then((res) => {
+    this.props.reqLogin(values).then((res) => {
       if (res.state === API_STATE_OK) {
         message.success('登录成功')
-        this.setState({
-          token: res.token
-        })
       }
     })
   }
-  add = () => {
-    console.log(1)
-    this.props.dispatch({
-      type: 'state'
-    })
-  }
   render() {
-    if (this.state.token) {
-      return <Redirect to="/layout"/>
+    if (this.props.user.token) {
+      return <Redirect to="/dashboard" />;
     }
     return (
       <div className="login-wrapper">
@@ -63,12 +53,6 @@ class Login extends Component {
                 登陆
               </Button>
             </Form.Item>
-            <Form.Item>
-              <Button className="login-btn" type="primary" onClick={this.add}>
-                添加
-              </Button>
-              {this.props.settingPanelVisible}
-            </Form.Item>
           </Form>
         </div>
       </div>
@@ -81,4 +65,4 @@ const mapStateToProps = (state) => {
     ...state
   };
 };
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps, {reqLogin})(Login);

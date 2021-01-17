@@ -45,7 +45,9 @@ export const login = config => {
   };
 }
 export const userInfo = (config) => {
-  const token = config.body;
+  const {
+    token
+  } = JSON.parse(config.body);
   const userInfo = users[token];
   if (!userInfo) {
     return {
