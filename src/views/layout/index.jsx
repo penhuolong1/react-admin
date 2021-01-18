@@ -3,6 +3,7 @@ import { Layout } from 'antd';
 import Header from './header/index.jsx';
 import Sider from './menu/index.jsx';
 import Content from './content/index.jsx';
+import TagsView from './tagsView/index.jsx';
 
 class Main extends Component {
   render() {
@@ -11,7 +12,8 @@ class Main extends Component {
       <Sider></Sider>
       <Layout>
         <Header />
-        <Content></Content>
+        <TagsView />
+        <Content />
       </Layout>
     </Layout>
     );

@@ -5,12 +5,15 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
 import { logout } from '@/store/actions/user.js'
 import { toggleCollapsed } from '@/store/actions/menu.js'
+import screenfull from 'screenfull'
+import Breadcrumb from './breadcrumb'
 
 import './index.scss'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   FullscreenOutlined,
+  FullscreenExitOutlined,
   SettingOutlined,
   DownOutlined
 } from '@ant-design/icons';
@@ -19,13 +22,20 @@ import {
 const { Header} = Layout;
 class index extends Component {
   state = {
-    isMenuOpen: false
+    isFull: false
   }
   // 退出
   reqLogOut = () => {
     this.props.logout().then( () => {
       message.success('退出成功')
     })
+  }
+  // 放大缩小屏幕
+  toggleFull = ()=> {
+    this.setState({
+      isFull: !this.state.isFull
+    })
+    screenfull.toggle()
   }
   // 切换菜单
   toggleCollapsed = () => {
@@ -55,12 +65,12 @@ class index extends Component {
             </Button>
           </div>
           <div className="title-wrapper">
-            首页
+            <Breadcrumb />
           </div>
         </div>
         <div className="layout-header-right">
-          <Button type="text" className="text-btn">
-            <FullscreenOutlined className="menu-icon"></FullscreenOutlined>
+          <Button type="text" className="text-btn" onClick={this.toggleFull}>
+            {!this.state.isFull ? <FullscreenOutlined className="menu-icon"></FullscreenOutlined> : <FullscreenExitOutlined className="menu-icon"></FullscreenExitOutlined>}
           </Button>
           <Button type="text" className="text-btn">
             <SettingOutlined className="menu-icon"></SettingOutlined>
