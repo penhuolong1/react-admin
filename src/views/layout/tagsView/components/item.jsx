@@ -1,21 +1,35 @@
 import React, { Component } from 'react';
 import { Tag } from 'antd'
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux'
+import { delTags } from '@/store/actions/tagsView.js'
 
 class item extends Component {
   handleClose = () => {
-
+    const path = this.props.delTags(this.props.item.path)
+    if (path) {
+      this.props.history.push(path)
+    }
+  }
+  // 点击跳转路由
+  clickItem = () => {
+    this.props.history.push(this.props.item.path)
   }
   render() {
-    console.log(this.props)
     const { item } = this.props
+    const sty = {
+      cursor: 'pointer'
+    }
     return (
       <Tag
         closable
-        color="warning"
+        style={sty}
+        color={item.active ? 'warning':''}
         onClose={e => {
           e.preventDefault();
           this.handleClose();
         }}
+        onClick={this.clickItem}
       >
         {item.title}
       </Tag>
@@ -23,4 +37,4 @@ class item extends Component {
   }
 }
 
-export default item;
+export default connect((state)=>state, {delTags})(withRouter(item));

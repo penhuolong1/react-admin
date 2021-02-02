@@ -25,7 +25,7 @@ class breadcrumb extends Component {
   }
   render() {
     const pathname = this.props.location.pathname
-    let pathList = this.getPathList(pathname, menuList)
+    let pathList = this.getPathList(pathname, menuList) || [] 
     if (pathList.length === 1 &&  pathList[0].title === '首页') {
       pathList = []
     }

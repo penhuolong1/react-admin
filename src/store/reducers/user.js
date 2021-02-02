@@ -7,7 +7,6 @@ const initState = {
 export default function user(state = initState, action) {
   switch (action.type) {
     case types.USER_SET_USER_INFO:
-      // console.log('-----'+state.settingPanelVisible ++)
       return {
         ...state,
         userInfo: action.userInfo

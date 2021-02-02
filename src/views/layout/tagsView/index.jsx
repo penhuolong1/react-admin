@@ -1,44 +1,41 @@
 import React, { Component } from 'react';
 import './index.scss'
+import { connect } from 'react-redux'
 import { Scrollbars } from "react-custom-scrollbars";
 import { Link, withRouter } from "react-router-dom";
 import Item from './components/item'
-import {findPathByLabelToObj} from '@/utils/tools.js'
+import { dealTagsViewList } from '@/store/actions/tagsView.js'
 
 
 
 class index extends Component {
-  state = {
-    tagList: []
-  }
   componentDidMount() {
-    console.log(this.props)
+    this.props.dealTagsViewList(this.props.tagsViewList, this.props.location)
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.props.dealTagsViewList(this.props.tagsViewList, nextProps.location)
+    }
   }
   render() {
-    const list = [
-      {
-        title: '首页',
-        path: '/123'
-      },
-      {
-        title: '首页',
-        path: '/123'
-      }
-    ]
+    const sty = {
+      alignItems: 'center',
+      height: '36px'
+    }
     return (
       <div className='tagsView-wrapper'>
-        {/* <Scrollbars> */}
-          <ul>
+        <Scrollbars>
+          <ul style={sty}>
             {
-             list.map((item, index) => {
+             this.props.tagsViewList.map((item, index) => {
                return (<Item key={index} item={item}></Item>)
              }) 
             }
           </ul>
-        {/* </Scrollbars> */}
+        </Scrollbars>
       </div>
     );
   }
 }
 
-export default withRouter(index);
+export default connect(state => state.tagsView, {dealTagsViewList})(withRouter(index));

@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Layout, Menu, Button } from 'antd';
+import { Layout, Menu } from 'antd';
 import { Link, withRouter } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
-
-
 import menuList from '@/config/menuConfig.js'
-import {
-  PieChartOutlined,
-  SettingOutlined
-} from '@ant-design/icons';
 
 const {Sider} = Layout;
 const { SubMenu } = Menu
 class index extends Component {
   componentDidMount() {
-    console.log(this.props)
   }
   getSubMenu = (menuList) => {
     return (<SubMenu key={menuList.path} icon={menuList.icon} title={menuList.title}>
@@ -64,4 +57,4 @@ class index extends Component {
   }
 }
 
-export default connect(state => state.menu)(withRouter(index));
+export default withRouter(index);

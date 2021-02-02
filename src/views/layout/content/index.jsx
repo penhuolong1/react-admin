@@ -11,7 +11,7 @@ const { Content } = Layout;
 class index extends Component {
   render() {
     const { pathname } = this.props.location
-    const title = findPathByLabelToObj(pathname, menuList).title
+    const title = findPathByLabelToObj(pathname, menuList) ? findPathByLabelToObj(pathname, menuList).title : ''
     return (
       <DocumentTitle title={title + 'Ant-Design-Pro'}>
         <Content>
