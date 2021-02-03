@@ -1,0 +1,32 @@
+.panel_group_item {
+  margin-bottom: 10px;
+}
+.panel_group_item .ant-card-body{
+  .panel_group_item_left {
+    padding: 10px 14px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.38s;
+    border-radius: 5px;
+    &:hover {
+      background-color: #ccc;
+    }
+    &>.icon {
+      font-size: 40px;
+    }
+  }
+  .panel_group_item_right {
+    float: right;
+    font-weight: bold;
+    .title {
+      font-size: 16px;
+      color: rgba(0,0,0,.45);
+      line-height: 18px;
+      margin-bottom: 10px;
+    }
+    .court {
+      font-size: 20px;
+      color: #666;
+    }
+  }
+}

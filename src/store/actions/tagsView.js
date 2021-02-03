@@ -6,7 +6,7 @@ import store from '../index'
 
 // 遍历获取导航菜单
 export const dealTagsViewList = (list, item) => (dispatch) => {
-  const title = findPathByLabelToObj(item.pathname, menuList).title
+  let title =item.pathname !== '/' ? findPathByLabelToObj(item.pathname, menuList).title : ''
   let list1 = [...list]
   if (!list1 || list1.length === 0) {
     list1.push({
