@@ -11,6 +11,9 @@ import {
 import './index.scss'
 
 class index extends Component {
+  clickCard = value => {
+    this.props.getLineType(value)
+  }
   render() {
     const list = [
       {
@@ -40,7 +43,7 @@ class index extends Component {
           {
           list.map((item, index) => {
             return (<Col md={12} lg={12} xl={6} key={index}>
-              <Card className="panel_group_item">
+              <Card className="panel_group_item" onClick={this.clickCard.bind(this, item.title)}>
                 <div className="panel_group_item_left">
                   {item.icon}
                 </div>
