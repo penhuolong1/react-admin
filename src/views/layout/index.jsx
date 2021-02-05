@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
+import { connect } from 'react-redux'
 import { Redirect, withRouter} from 'react-router-dom'
-
-
-
 import Header from './header/index.jsx';
 import Sider from './menu/index.jsx';
 import Content from './content/index.jsx';
 import TagsView from './tagsView/index.jsx';
+import './index.scss'
 
 class Main extends Component {
   render() {
@@ -18,11 +17,11 @@ class Main extends Component {
     } else {
       return (
         <Layout style={{ minHeight: "100vh" }}>
-          <Sider />
-          <Layout>
+          <Sider/>
+          <Layout className="my-ant-layout" style={ this.props.collapsed ? {marginLeft: 80} : {marginLeft: 200}}>
             <Header />
             <TagsView />
-            <Content />
+            <Content/>
           </Layout>
         </Layout>
       );
@@ -30,4 +29,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(Main);
+export default connect(state => state.menu)(withRouter(Main));

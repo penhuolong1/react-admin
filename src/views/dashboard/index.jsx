@@ -4,6 +4,8 @@ import LineCharts from './components/lineCharts'
 import RaddarChart from './components/raddarChart'
 import PieChart from './components/pieChart'
 import BarChart from './components/barChart'
+import Table1 from './components/table'
+import BoxCard from './components/boxCard'
 import { Row, Col, Card } from 'antd'
 
 
@@ -52,6 +54,14 @@ class index extends Component {
           </Col>
           <Col md={24} lg={24} xl={8}>
             <BarChart />
+          </Col>
+        </Row>
+        <Row gutter={16} style={{marginTop: '10px'}}>
+          <Col md={24} lg={24} xl={12}>
+            <Table1 />
+          </Col>
+          <Col md={24} lg={24} xl={12}>
+            <BoxCard />
           </Col>
         </Row>
       </div>

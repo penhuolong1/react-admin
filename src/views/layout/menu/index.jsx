@@ -29,7 +29,17 @@ class index extends Component {
     const { collapsed } = this.props
     const path = this.props.location.pathname
     return (
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider 
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+        }}
+      >
         <Scrollbars> 
           <Menu
             defaultSelectedKeys={['/dashboard']} 
@@ -57,4 +67,4 @@ class index extends Component {
   }
 }
 
-export default withRouter(index);
+export default connect(state => state.menu)(withRouter(index));
