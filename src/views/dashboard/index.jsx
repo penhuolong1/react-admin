@@ -6,7 +6,7 @@ import PieChart from './components/pieChart'
 import BarChart from './components/barChart'
 import Table1 from './components/table'
 import BoxCard from './components/boxCard'
-import { Row, Col, Card } from 'antd'
+import { Row, Col } from 'antd'
 
 
 class index extends Component {

@@ -31,6 +31,7 @@ class index extends Component {
                     )
                   })
                 }
+                <Redirect to="/404" /> {/* 没有对应路由就匹配 */} 
               </Switch>
             </CSSTransition>
           </TransitionGroup>

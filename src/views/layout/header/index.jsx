@@ -60,7 +60,7 @@ class index extends Component {
       <Header className="layout-header">
         <div className="layout-header-left">
           <div className="menu-icon">
-            <Button type="text" className="text-btn" onClick={this.toggleCollapsed}>
+            <Button type="text" id="hamburger" className="text-btn" onClick={this.toggleCollapsed}>
               {React.createElement(this.props.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
             </Button>
           </div>
@@ -69,10 +69,10 @@ class index extends Component {
           </div>
         </div>
         <div className="layout-header-right">
-          <Button type="text" className="text-btn" onClick={this.toggleFull}>
+          <Button id="fullscreen" type="text" className="text-btn" onClick={this.toggleFull}>
             {!this.state.isFull ? <FullscreenOutlined className="menu-icon"></FullscreenOutlined> : <FullscreenExitOutlined className="menu-icon"></FullscreenExitOutlined>}
           </Button>
-          <Button type="text" className="text-btn">
+          <Button id="setting" type="text" className="text-btn">
             <SettingOutlined className="menu-icon"></SettingOutlined>
           </Button>
           <Dropdown overlay={menu} trigger={['click']}>

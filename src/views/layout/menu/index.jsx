@@ -26,7 +26,9 @@ class index extends Component {
       </SubMenu>)
   }
   render() {
-    const { collapsed } = this.props
+    const { collapsed } = this.props.menu
+    const { role } = this.props.user.userInfo
+    debugger
     const path = this.props.location.pathname
     return (
       <Sider 
@@ -50,12 +52,14 @@ class index extends Component {
             {
               menuList.map((item, index) => {
                 let ary = []
-                if (!item.children) {
-                  ary.push(<Menu.Item key={item.path} icon={item.icon}>
-                    <Link to={item.path}>{item.title}</Link>
-                  </Menu.Item>)
-                } else {
-                  ary.push(this.getSubMenu(item))
+                if (!item.isNotMenu && item.roles?.indexOf(role) !== -1) {
+                  if (!item.children) {
+                    ary.push(<Menu.Item key={item.path} icon={item.icon}>
+                      <Link to={item.path}>{item.title}</Link>
+                    </Menu.Item>)
+                  } else {
+                    ary.push(this.getSubMenu(item))
+                  }
                 }
                 return ary
               })
@@ -67,4 +71,4 @@ class index extends Component {
   }
 }
 
-export default connect(state => state.menu)(withRouter(index));
+export default connect(state => state)(withRouter(index));

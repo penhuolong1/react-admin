@@ -190,5 +190,15 @@ const menuList = [
     icon: <BugOutlined />,
     roles:["admin"]
   },
+  {
+    title: "404",
+    path: "/404",
+    isNotMenu: true // 不显示到菜单上
+  },
+  {
+    title: "403",
+    path: "/403",
+    isNotMenu: true // 不显示到菜单上
+  },
 ];
 export default menuList;
