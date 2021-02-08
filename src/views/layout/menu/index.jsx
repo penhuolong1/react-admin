@@ -11,16 +11,20 @@ class index extends Component {
   componentDidMount() {
   }
   getSubMenu = (menuList) => {
+    const { role } = this.props.user.userInfo
     return (<SubMenu key={menuList.path} icon={menuList.icon} title={menuList.title}>
       { 
         menuList.children.map(item => {
-          if (item.children && item.children.length > 0) {
-            return this.getSubMenu(item)
-          } else {
-            return (<Menu.Item key={item.path} icon={item.icon}>
-              <Link to={item.path}>{item.title}</Link>
-            </Menu.Item>)
+          if (!item.isNotMenu && item.roles?.indexOf(role) !== -1) {
+            if (item.children && item.children.length > 0) {
+              return this.getSubMenu(item)
+            } else {
+              return (<Menu.Item key={item.path} icon={item.icon}>
+                <Link to={item.path}>{item.title}</Link>
+              </Menu.Item>)
+            }
           }
+          return []
         })
       }
       </SubMenu>)
@@ -28,7 +32,6 @@ class index extends Component {
   render() {
     const { collapsed } = this.props.menu
     const { role } = this.props.user.userInfo
-    debugger
     const path = this.props.location.pathname
     return (
       <Sider 

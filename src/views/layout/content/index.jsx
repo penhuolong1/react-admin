@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Layout } from 'antd';
+import { connect } from 'react-redux'
 import DocumentTitle from "react-document-title";
 import { Link, withRouter } from "react-router-dom";
 import {getTreeItemByLabel, findPathByLabelToObj} from '@/utils/tools.js'
@@ -14,6 +15,14 @@ class index extends Component {
   render() {
     const { pathname } = this.props.location
     const title = findPathByLabelToObj(pathname, menuList) ? findPathByLabelToObj(pathname, menuList).title : ''
+    const obj = findPathByLabelToObj(pathname, menuList)
+    const { role } = this.props.userInfo
+    let isHasAuthority = true // 是否有权限
+    if (obj && obj.roles) {
+      if (obj?.roles.indexOf(role) === -1) {
+        isHasAuthority = false
+      }
+    }
     return (
       <DocumentTitle title={title + 'Ant-Design-Pro'}>
         <Content className="main-content">
@@ -24,6 +33,9 @@ class index extends Component {
               exit={false}
             >
               <Switch>
+                {
+                  !isHasAuthority ? <Redirect to="/403" /> : '' // 没权限的重定向到403页面
+                }
                 {
                   routeMap.map((item, index) => {
                     return (
@@ -41,4 +53,4 @@ class index extends Component {
   }
 }
 
-export default withRouter(index);
+export default connect(state => state.user)(withRouter(index));

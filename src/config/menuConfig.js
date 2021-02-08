@@ -37,11 +37,12 @@ const menuList = [
     title: "权限测试",
     path: "/permission",
     icon: <InsuranceOutlined />,
+    roles:["admin", "guest", "editor"],
     children: [
       {
         title: "权限说明",
         path: "/permission/explanation",
-        roles:["admin"]
+        roles:["admin", "guest", "editor"]
       },
       {
         title: "admin页面",
@@ -51,12 +52,12 @@ const menuList = [
       {
         title: "guest页面",
         path: "/permission/guestPage",
-        roles:["guest"]
+        roles:["admin","guest"]
       },
       {
         title: "editor页面",
         path: "/permission/editorPage",
-        roles:["editor"]
+        roles:["admin","editor"]
       },
     ],
   },

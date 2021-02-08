@@ -28,6 +28,7 @@ class index extends Component {
   reqLogOut = () => {
     this.props.logout().then( () => {
       message.success('退出成功')
+      window.location.reload()
     })
   }
   // 放大缩小屏幕
@@ -42,7 +43,7 @@ class index extends Component {
     this.props.toggleCollapsed(!this.props.collapsed)
   }
   render() {
-    const {avatar} = this.props.userInfo
+    const {name} = this.props.userInfo
     const menu = (
       <Menu>
         <Menu.Item>
@@ -50,9 +51,9 @@ class index extends Component {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
-          <Button type="text" onClick={this.reqLogOut}>
+          <a type="text" onClick={this.reqLogOut}>
             退出
-          </Button>
+          </a>
         </Menu.Item>
       </Menu>
     )
@@ -77,7 +78,8 @@ class index extends Component {
           </Button>
           <Dropdown overlay={menu} trigger={['click']}>
             <Button type="text">
-              <Avatar src={avatar} />  <DownOutlined />
+              {name}
+              <DownOutlined />
             </Button>
           </Dropdown>
         </div>

@@ -1,7 +1,7 @@
 import Routers from './router/index.jsx'
 import { Provider } from 'react-redux'
 import store from './store'
-import './App.css'
+import './App.scss'
 import 'driver.js/dist/driver.min.css';
 
 function App() {
