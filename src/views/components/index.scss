@@ -5,3 +5,27 @@
   margin-top: -5px;
   padding: 0 10px;
 }
+
+.drag-content {
+  display: inline-block;
+  width: 300px;
+  background-color: rgb(235, 236, 240);
+  padding: 10px;
+  margin-right: 10px;
+  .draggable {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 5px;
+    display: flex;
+    .avator {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .content {
+      padding-left: 5px;
+      flex: 1;
+      line-height: 1.2;
+    }
+  }
+}

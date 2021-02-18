@@ -10,6 +10,11 @@ const Admin = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/
 const Editor = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/permission/editor.jsx'), loading: Loading});
 const Guest = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/permission/guest.jsx'), loading: Loading});
 const RichText = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/components/richText.jsx'), loading: Loading});
+const Draggable = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/components/draggable.jsx'), loading: Loading});
+const JSONForm = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/components/JSON-Form.jsx'), loading: Loading});
+const Menu1 = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/nested/menu1.jsx'), loading: Loading});
+const Menu121 = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/nested/menu1-2-1.jsx'), loading: Loading});
+const Table = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/table/index.jsx'), loading: Loading});
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -23,4 +28,9 @@ export default [
   { path: "/permission/guestPage", component: Editor },
   { path: "/permission/editorPage", component: Guest },
   { path: "/components/richTextEditor", component: RichText },
+  { path: "/components/draggable", component: Draggable },
+  { path: "/components/JSON-Form", component: JSONForm },
+  { path: "/nested/menu1/menu1-1", component: Menu1 },
+  { path: "/nested/menu1/menu1-2/menu1-2-1", component: Menu121 },
+  { path: "/table", component: Table },
 ]

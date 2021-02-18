@@ -11,7 +11,7 @@ for (let i = 0; i < count; i++) {
   }))
 }
 
-export const tableList = () => {
+export const dashboardList = () => {
   return {
     state: 0,
     data: list

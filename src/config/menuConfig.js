@@ -73,36 +73,13 @@ const menuList = [
         roles:["admin","editor"],
       },
       {
-        title: "Markdown",
-        path: "/components/Markdown",
-        roles:["admin","editor"],
-      },
-      {
         title: "拖拽列表",
         path: "/components/draggable",
         roles:["admin","editor"],
       },
-    ],
-  },
-  {
-    title: "图表",
-    path: "/charts",
-    icon: <AreaChartOutlined />,
-    roles:["admin","editor"],
-    children: [
       {
-        title: "键盘图表",
-        path: "/charts/keyboard",
-        roles:["admin","editor"],
-      },
-      {
-        title: "折线图",
-        path: "/charts/line",
-        roles:["admin","editor"],
-      },
-      {
-        title: "混合图表",
-        path: "/charts/mix-chart",
+        title: "JSON-表单",
+        path: "/components/JSON-Form",
         roles:["admin","editor"],
       },
     ],
