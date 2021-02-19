@@ -1,19 +1,44 @@
 import React, { Component } from 'react';
-import { Card, Table } from 'antd'
+import { Card, Table, Button } from 'antd'
 import { tableList } from '@/api/table.js'
+import JSONForm from '@/components/JSONForm'
 
 class index extends Component {
   state = {
-    list: null
+    list: null,
+    loading: true
   }
   componentDidMount() {
-    tableList().then(res => {
-      if (res.state === 0) {
-        this.setState({
-          list: res.data
-        })
-      }
+    this.getTableList()
+  }
+  // 搜索
+  search = async(val) => {
+    await this.getTableList(val)
+  }
+  // 获取列表数据
+  getTableList = (params) => {
+    this.setState({
+      loading: true
     })
+    console.log(params)
+    return new Promise((resolve) => {
+      tableList(params).then(res => {
+        this.setState({
+          loading: false
+        })
+        resolve()
+        if (res.state === 0) {
+          this.setState({
+            list: res.data
+          })
+          console.log(this.state.list)
+        }
+      })
+    })
+  }
+  // 删除
+  del = () => {
+
   }
   render() {
     const columns = [
@@ -53,14 +78,76 @@ class index extends Component {
         dataIndex: 'date',
         key: 'date',
         render: text => <span>{text}</span>
+      },
+      {
+        title: '操作',
+        dataIndex: 'operation',
+        render: text => <span>
+          <Button type="link" onclick={this.del}>删除</Button>
+          <Button type="link">编辑</Button>
+        </span>
       }
+    ]
+    const formInfoList = [
+      {
+        name: 'title',
+        type: 'Input',
+        label: '标题',
+      },
+      {
+        name: 'status',
+        type: 'Select',
+        label: '类型',
+        data: [
+          {
+            value: 'published',
+            text: 'published'
+          },
+          {
+            value: 'draft',
+            text: 'draft'
+          }
+        ],
+      },
+      {
+        name: 'star',
+        type: 'Select',
+        label: '推荐指数',
+        data: [
+          {
+            value: 1,
+            text: '★'
+          },
+          {
+            value: 2,
+            text: '★★'
+          },
+          {
+            value: 3,
+            text: '★★★'
+          }
+        ],
+      },
     ]
     return (
       <div>
         <Card title="搜索" className="marginBottom">
+          <JSONForm
+            layout="inline"
+            formInfoList={formInfoList}
+            formItemWidth="120px"
+            resetBtnText="重置"
+            submitBtnText="搜索"
+            submit={this.search}
+          ></JSONForm>
         </Card>
         <Card>
-          <Table dataSource={this.state.list} columns={columns}></Table>
+          <Table 
+            dataSource={this.state.list}
+            columns={columns}
+            rowKey="id"
+            loading={this.state.loading}
+          ></Table>
         </Card>
       </div>
     );

@@ -14,18 +14,32 @@ import {
 
 class index extends Component {
   formRef = React.createRef();
+  state = {
+    loading: false
+  }
   reset = () => {
     this.formRef.current.resetFields();
+  }
+  onFinish = (obj) => {
+    this.setState({
+      loading: true
+    })
+
+    this.props.submit(obj).then(() => {
+      this.setState({
+        loading: false
+      })
+    })
   }
   render() {
     return (
       <div>
         <Form
           ref={this.formRef}
-          labelCol={{ span: this.props.labelCol || 4 }}
-          wrapperCol={{ span: this.props.wrapperCol || 4 }}
+          labelCol={{ span: this.props.labelCol }}
+          wrapperCol={{ span: this.props.wrapperCol }}
           layout={this.props.layout}
-          onFinish={this.props.submit}
+          onFinish={this.onFinish}
           initialValues={this.props.initialValues}
         >
           {
@@ -40,10 +54,10 @@ class index extends Component {
                     let str = null
                     switch (item.type) {
                       case 'Input':
-                        str = (<Input {...item.config}></Input>)
+                        str = (<Input {...item.config} style={{width: this.props.formItemWidth}}></Input>)
                         break;
                       case 'Password':
-                        str = (<Input.Password {...item.config}></Input.Password>)
+                        str = (<Input.Password {...item.config} style={{width: this.props.formItemWidth}}></Input.Password>)
                         break;
                       case 'Radio':
                         str = (
@@ -58,7 +72,7 @@ class index extends Component {
                         break;
                       case 'Select':
                         str = (
-                          <Select {...item.config}>
+                          <Select {...item.config} style={{width: this.props.formItemWidth}}>
                             {
                               item.data.map((item1, index1) => (
                                 <Select.Option key={index1} value={item1.value}>{item1.text}</Select.Option>
@@ -69,7 +83,7 @@ class index extends Component {
                         break;
                       case 'TreeSelect':
                         str = (
-                          <TreeSelect {...item.config} treeData={item.data}>
+                          <TreeSelect {...item.config} treeData={item.data} style={{width: this.props.formItemWidth}}>
                           </TreeSelect>
                         )
                         break;
@@ -78,6 +92,7 @@ class index extends Component {
                             <Cascader
                               {...item.config}
                               options={item.data}
+                              style={{width: this.props.formItemWidth}}
                             />
                           )
                           break;
@@ -85,6 +100,7 @@ class index extends Component {
                         str = (
                           <DatePicker
                             {...item.config}
+                            style={{width: this.props.formItemWidth}}
                           />
                         )
                         break;
@@ -106,10 +122,10 @@ class index extends Component {
           }
           <Form.Item wrapperCol={{ span: this.props.wrapperCol, offset: this.props.labelCol }}>
             <Button onClick={this.reset} style={{marginRight: '5px'}}>
-              clear
+              {this.props.resetBtnText || 'clear'}
             </Button>
-            <Button type="primary" htmlType="submit">
-              Submit
+            <Button type="primary" loading={this.state.loading} htmlType="submit">
+              {this.props.submitBtnText || 'Submit'}
             </Button>
           </Form.Item>
         </Form>

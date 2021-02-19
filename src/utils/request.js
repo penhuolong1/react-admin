@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { API_STATE_ERR } from './constVal'
 import { message } from 'antd'
+import { isUnderfined, isNull} from '@/utils/tools.js'
 
 const service = axios.create({
   baseURL: '/api',

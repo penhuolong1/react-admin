@@ -1,7 +1,9 @@
 import Mock from 'mockjs'
 const list = []
 const count = 100
-
+Mock.setup({
+  timeout: '1000-2000' // 表示响应时间介于 200 和 600 毫秒之间，默认值是'10-100'。
+})
 for (let i = 0; i < count; i++) {
   list.push(Mock.mock({
     id: '@guid()',
@@ -14,10 +16,17 @@ for (let i = 0; i < count; i++) {
   }))
 }
 
-export const tableList = () => {
+export const tableList = (config) => {
+  const params = JSON.parse(config.body)
+  const filterList = list.filter(item => {
+    if (params?.star && item.star.length !== params?.star) return false;
+    if (params?.status && item.status !== params?.status) return false;
+    if (params?.title && item.title.indexOf(params?.title) < 0) return false;
+    return true;
+  })
   return {
     state: 0,
-    data: list
+    data: filterList
   };
 }
 

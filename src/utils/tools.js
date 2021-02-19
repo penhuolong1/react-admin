@@ -89,3 +89,18 @@ export function debounce(func, wait, immediate) {
     return result;
   };
 }
+
+
+/**
+ * 判断是否为undefined
+ */
+export function isUnderfined(val) {
+  return typeof(val) == 'undefined'
+}
+
+/**
+ * 判断是否为Null
+ */
+export function isNull(val) {
+  return !val && typeof(val)!="undefined" && val!=0
+}
