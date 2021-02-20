@@ -50,3 +50,13 @@ export const editItem = (config) => {
     msg: '修改成功'
   };
 }
+
+export const findTableById = (config) => {
+  const data = JSON.parse(config.body);
+  const { id } = data;
+  const info = list.find(item => item.id === id)
+  return {
+    state: 0,
+    data: info
+  };
+}

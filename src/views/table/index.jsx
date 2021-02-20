@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Table, Button } from 'antd'
-import { tableList } from '@/api/table.js'
+import { tableList, deleteItem } from '@/api/table.js'
 import JSONForm from '@/components/JSONForm'
 
 class index extends Component {
@@ -8,11 +8,13 @@ class index extends Component {
     list: null,
     loading: true
   }
+  searchParams = {}
   componentDidMount() {
     this.getTableList()
   }
   // 搜索
   search = async(val) => {
+    this.searchParams = val
     await this.getTableList(val)
   }
   // 获取列表数据
@@ -31,14 +33,18 @@ class index extends Component {
           this.setState({
             list: res.data
           })
-          console.log(this.state.list)
         }
       })
     })
   }
   // 删除
-  del = () => {
-
+  del = (id) => {
+    console.log(id)
+    deleteItem({id}).then(({state, msg}) => {
+      if (state === 0) {
+        this.getTableList(this.searchParams)
+      }
+    })
   }
   render() {
     const columns = [
@@ -81,9 +87,8 @@ class index extends Component {
       },
       {
         title: '操作',
-        dataIndex: 'operation',
         render: text => <span>
-          <Button type="link" onclick={this.del}>删除</Button>
+          <Button type="link" onClick={this.del.bind(this, text.id)}>删除</Button>
           <Button type="link">编辑</Button>
         </span>
       }
