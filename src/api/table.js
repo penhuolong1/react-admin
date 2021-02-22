@@ -46,6 +46,9 @@ export function findTableById(data) {
   return request({
     url: '/table/findById',
     method: 'get',
+    headers: {
+      isLoading: true,
+    },
     data
   })
 }

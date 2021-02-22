@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { Card, Table, Button } from 'antd'
-import { tableList, deleteItem } from '@/api/table.js'
+import { tableList, deleteItem, findTableById } from '@/api/table.js'
 import JSONForm from '@/components/JSONForm'
+import EditForm from './editForm'
+import moment from 'moment';
 
 class index extends Component {
   state = {
     list: null,
-    loading: true
+    loading: true,
+    visible: false,
+    initialValues: null
   }
   searchParams = {}
   componentDidMount() {
@@ -45,6 +49,29 @@ class index extends Component {
         this.getTableList(this.searchParams)
       }
     })
+  }
+  // 关闭模态框
+  cancel = () => {
+    this.setState({
+      visible: false
+    })
+  }
+  // 编辑
+  edit = (id) => {
+    findTableById({id}).then(({state, data}) => {
+      if (state === 0) {
+        data.date = moment(data.date)
+        data.star = data.star.length 
+        this.setState({
+          visible: true,
+          initialValues: data
+        })
+      }
+    })
+  }
+  // 提交
+  submit = () => {
+    this.getTableList()
   }
   render() {
     const columns = [
@@ -89,7 +116,7 @@ class index extends Component {
         title: '操作',
         render: text => <span>
           <Button type="link" onClick={this.del.bind(this, text.id)}>删除</Button>
-          <Button type="link">编辑</Button>
+          <Button type="link" onClick={this.edit.bind(this, text.id)}>编辑</Button>
         </span>
       }
     ]
@@ -154,6 +181,12 @@ class index extends Component {
             loading={this.state.loading}
           ></Table>
         </Card>
+        <EditForm 
+          visible={this.state.visible}
+          initialValues={this.state.initialValues}
+          cancel={this.cancel}
+          submit={this.submit}
+        ></EditForm>
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import {
   Form,
   Input,
@@ -10,6 +11,7 @@ import {
   InputNumber,
   TreeSelect,
   Switch,
+  Rate
 } from 'antd';
 
 class index extends Component {
@@ -19,6 +21,7 @@ class index extends Component {
   }
   reset = () => {
     this.formRef.current.resetFields();
+    this.props.reset()
   }
   onFinish = (obj) => {
     this.setState({
@@ -30,6 +33,11 @@ class index extends Component {
         loading: false
       })
     })
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.initialValues !== this.props.initialValues) {
+      this.formRef.current.setFieldsValue(nextProps.initialValues)
+    }
   }
   render() {
     return (
@@ -111,6 +119,13 @@ class index extends Component {
                           />
                         )
                         break;
+                      case 'Rate':
+                          str = (
+                            <Rate
+                              {...item.config}
+                            />
+                          )
+                          break;
                       default:
                         break;
                     }
