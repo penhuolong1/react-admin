@@ -54,6 +54,7 @@ class Login extends Component {
               </Button>
             </Form.Item>
           </Form>
+          <p>账号 admin, editor, guest 密码随便填</p>
         </div>
       </div>
     );
