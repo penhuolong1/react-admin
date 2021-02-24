@@ -104,3 +104,40 @@ export function isUnderfined(val) {
 export function isNull(val) {
   return !val && typeof(val)!="undefined" && val!=0
 }
+
+/**
+* 获取特定格式时间
+* @param {Object} date 时间搓
+* @param {String} format 格式
+* @return {String} 特定格式的时间
+*
+* 例如：
+* var now = new Date().getTime();
+* formatDate(now, 'yyyy-MM-dd H:m:s'); // 2017-01-16 14:32:22
+*/
+export const formatDate = function(time, formatStr) {
+  if (!time) {
+    return;
+  }
+  let date = new Date(time);
+  let Y = date.getFullYear();
+  let M = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+  let D = date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate();
+  let h = date.getHours();
+  h = h < 10 ? `0${h}`: h;
+  let m = date.getMinutes();
+  m = m < 10 ? `0${m}`: m;
+  let s = date.getSeconds();
+  s = s < 10 ? `0${s}`: s;
+  formatStr = formatStr || 'YYYY-MM-DD H:m:s';
+  return formatStr.replace(/YYYY|MM|DD|H|m|s/ig, function (matches) {
+      return ({
+          YYYY: Y,
+          MM: M,
+          DD: D,
+          H: h,
+          m: m,
+          s: s
+      })[matches];
+  });
+}

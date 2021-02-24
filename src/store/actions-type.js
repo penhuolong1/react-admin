@@ -7,3 +7,6 @@ export const MENU_COLLAPSED = 'MENU_COLLAPSED' // 是否展开菜单
 
 // 导航菜单相关
 export const TAGS_VIEW_LIST = 'TAGS_VIEW_LIST' // 导航菜单的列表
+
+// 检测器
+export const BUG_ADD_BUG = "BUG_ADD_BUG";

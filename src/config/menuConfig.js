@@ -151,18 +151,6 @@ const menuList = [
     roles:["admin","editor"]
   },
   {
-    title: "用户管理",
-    path: "/user",
-    icon: <UsergroupAddOutlined />,
-    roles:["admin"]
-  },
-  {
-    title: "关于作者",
-    path: "/about",
-    icon: <UserOutlined />,
-    roles:["admin","editor","guest"]
-  },
-  {
     title: "Bug收集",
     path: "/bug",
     icon: <BugOutlined />,

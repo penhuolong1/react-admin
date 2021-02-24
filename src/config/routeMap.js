@@ -15,6 +15,11 @@ const JSONForm = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/
 const Menu1 = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/nested/menu1.jsx'), loading: Loading});
 const Menu121 = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/nested/menu1-2-1.jsx'), loading: Loading});
 const Table = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/table/index.jsx'), loading: Loading});
+const ExcelExport = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/excel/excelExport.jsx'), loading: Loading});
+const ExcelUpload = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/excel/excelUpload.jsx'), loading: Loading});
+const ExcelZip = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/zip/index.jsx'), loading: Loading});
+const Copy = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/copy/index.jsx'), loading: Loading});
+const Bug = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/bug/index.jsx'), loading: Loading});
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -33,4 +38,9 @@ export default [
   { path: "/nested/menu1/menu1-1", component: Menu1 },
   { path: "/nested/menu1/menu1-2/menu1-2-1", component: Menu121 },
   { path: "/table", component: Table },
+  { path: "/excel/export", component: ExcelExport },
+  { path: "/excel/upload", component: ExcelUpload },
+  { path: "/zip", component: ExcelZip },
+  { path: "/clipboard", component: Copy },
+  { path: "/bug", component: Bug }
 ]
